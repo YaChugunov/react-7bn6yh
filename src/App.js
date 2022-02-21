@@ -1,32 +1,41 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 function UserName(props) {
-  const {name} = props;
-  return <h1 className = {name === "Ivan" ? 'name' : null}>{props.name2}</h1>;
+  const { name2 } = props;
+  return (
+    <h1 className={name2 === 'Username' ? 'error' : 'name'}>{props.name2}</h1>
+  );
 }
 
 function UserProfile(props) {
-  return <UserName name2 = {props.data.name1}/>;
+  const { user } = props;
+  return <UserName name2={user.name1} />;
 }
 
-
-
 export default function App() {
-
-  const user = { 
-    name1:      'Ivan',
-    status:     'React Developer',
-    online:     true,
-    avatar:     '/logo.svg',
-    interests:  ['JavaScript','React','Frontend']
+  const user = {
+    name1: 'Username1',
+    status: 'React Developer',
+    online: true,
+    avatar: 'http://cdn.onlinewebfonts.com/svg/img_176857.png',
+    logosize: 100,
+    interests: ['JavaScript', 'React', 'Frontend'],
   };
-
+  if (!user.online) {
+    return null;
+  }
   return (
     <div>
       <h1>Hello StackBlitz!</h1>
       <p>Start editing to see some magic happen :)</p>
-      <UserProfile data = {user}/>
+      <ul>
+        {user.interests.map((interests) => {
+          return <li>{interests}</li>;
+        })}
+      </ul>
+      <UserProfile user={user} />
+      <img src={user.avatar} width={user.logosize} />
     </div>
   );
 }
