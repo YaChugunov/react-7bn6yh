@@ -1,6 +1,17 @@
 import React from 'react';
 import './style.css';
 
+function UserInterests (props) {
+  const { interests } = props;
+  return (
+    <ul>
+      {interests.map((interests) => {
+        return <li>{interests.title}</li>;
+      })}
+    </ul>
+  );
+}
+
 function UserName(props) {
   const { name2 } = props;
   return (
@@ -20,7 +31,11 @@ export default function App() {
     online: true,
     avatar: 'http://cdn.onlinewebfonts.com/svg/img_176857.png',
     logosize: 100,
-    interests: ['JavaScript', 'React', 'Frontend'],
+    interests: [
+      {id: '1', title: 'JavaScript'}, 
+      {id: '2', title: 'React'},
+      {id: '3', title: 'Frontend'},
+    ],
   };
   if (!user.online) {
     return null;
@@ -29,11 +44,7 @@ export default function App() {
     <div>
       <h1>Hello StackBlitz!</h1>
       <p>Start editing to see some magic happen :)</p>
-      <ul>
-        {user.interests.map((interests) => {
-          return <li>{interests}</li>;
-        })}
-      </ul>
+      <UserInterests interests={user.interests}/>
       <UserProfile user={user} />
       <img src={user.avatar} width={user.logosize} />
     </div>
